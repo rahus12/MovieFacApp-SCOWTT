@@ -7,11 +7,6 @@ import { redirect } from "next/navigation"
 export async function setMovie(formData: FormData) {
     const session = await auth()
     const favMovie = formData.get("favMovie")?.toString()
-    // const currUser = await prisma.user.findUnique({
-    //     where: {
-    //         email: session!.user!.email!
-    //     }
-    // })
     
     await prisma.user.update({
         where: {

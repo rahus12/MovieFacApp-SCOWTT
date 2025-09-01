@@ -4,18 +4,18 @@ import { auth } from "@/auth"
 import {SignOut} from "@/components/auth/sign-inOut-button"
 import UserAvatar from "@/components/userAvatar"
 
-import { setMovie } from "../api/actions/actions"
 import { getMovieFact } from "../api/openAI/openAI"
-import { redirect } from "next/navigation"
-import Link from "next/link"
 
-import UpdateMovie from "../updateMovie/page"
+import MovieSection from "@/components/MovieSection"
+import { redirect } from "next/navigation"
 
 export default async function Page() {
   const session = await auth()
-  if (!session) return <div>Not authenticated</div> 
+  if (!session) return redirect("/") 
+
   console.log(JSON.stringify(session))
   const favMovie = session.user.fav_movie
+
   let fact 
   if (favMovie != "" && favMovie != null) {
     fact = getMovieFact()
@@ -37,27 +37,7 @@ export default async function Page() {
       </div>
 
       {/* to enter a movie */}
-      {favMovie == "" ? (
-        <UpdateMovie/>
-        
-        ):(
-        <>
-        <div className="w-full max-w-2xl bg-gray-700 p-6 rounded-2xl shadow-md text-center">
-            {/* Movie Facts Box */}
-            <h2 className="text-xl font-semibold text-gray-150 mb-2">Movie Fact 🎬</h2>
-            <p className="text-gray-200">
-            {fact}
-            </p>
-        </div>
-        <div className="flex justify-center mt-6">
-          <Link href="/updateMovie">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-xl shadow-md transition-colors duration-200">
-              Update Movie
-            </button>
-          </Link>
-        </div>
-        </>
-        )}
+      <MovieSection favMovie={favMovie} fact={fact} />
       <div className="flex justify-center mt-6 text-gray-500">
         <p>Created using NextJS</p>
       </div>
