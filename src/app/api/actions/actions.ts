@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma"
 import { auth } from "@/auth"
-import { json } from "stream/consumers"
+import { redirect } from "next/navigation"
 
 export async function setMovie(formData: FormData) {
     const session = await auth()
@@ -23,4 +23,5 @@ export async function setMovie(formData: FormData) {
     })
     // console.log(JSON.stringify(currUser))
     console.log(JSON.stringify(session))
+    return redirect("/userPage")
 }
