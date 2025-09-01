@@ -29,8 +29,8 @@ export function SignOut() {
         await signOut({redirectTo: "/"})
       }}
     >
-      <button type="submit" className="w-40 rounded-xl bg-gray-600 px-4 py-2 text-white font-semibold 
-                   shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 
+      <button type="submit" className="w-40 rounded-xl bg-red-700 px-4 py-2 text-white font-semibold 
+                   shadow-md hover:bg-red-500 focus:outline-none focus:ring-2 
                    focus:ring-gray-400 focus:ring-offset-1 transition"
                    >Sign Out</button>
     </form>
